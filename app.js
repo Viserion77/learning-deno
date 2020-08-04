@@ -39,9 +39,10 @@ export const getDragon = ({ params, response }) => {
 
 export const addDragon = async ({ request, response }) => {
     const body = await request.body();
-    const dragon = body.value;
+    const dragon = await body.value;
     console.log('addDragon', dragon)
     dragons.push(dragon);
+    console.log('dragons',dragons)
 
     response.body = { msg: `ok`, dragon };
     response.status = 200
@@ -51,7 +52,7 @@ export const updateDragon = async ({ params, request, response }) => {
     const temp = dragons.filter(dragon => dragon.name === params.name);
 
     const body = await request.body();
-    const { age } = body.value;
+    const { age } = await body.value;
 
     if (temp.length) {
         console.log('updateDragon', age)
